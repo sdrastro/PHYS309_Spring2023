@@ -13,3 +13,5 @@ Computer-based homework assignments for PHYS 309, Physics of the 20th and 21st C
 [How version control works](https://docs.github.com/en/get-started/using-git/about-git)
 
 [How to upload your completed assignment ("push")](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository)
+
+[Introduction to GitHub: Tutorial that shows you how to create a repository, commit a file, open a pull request, and merge your pull request](https://github.com/skills/introduction-to-github)
