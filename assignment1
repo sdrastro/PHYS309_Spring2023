@@ -1,0 +1,105 @@
+#!/usr/bin/python3
+
+import numpy as np
+import matplotlib.pyplot as plt
+#import math as m
+#import pandas as pd
+from scipy import constants as cn
+#  https://docs.scipy.org/doc/scipy/reference/constants.html
+
+# 1
+
+rMAX = 1
+q = cn.elementary_charge
+rp = np.linspace(0.1,rMAX,100);
+Ep = 1/(4*cn.pi*cn.epsilon_0) * q/rp**2
+
+plt.plot(rp,Ep)
+plt.xlabel("r', m")
+plt.ylabel("E', N/C")
+plt.show()
+
+#2
+f = np.linspace(0,2.1,100);
+cp = cn.c*(1-f)
+plt.plot(f,cp)
+plt.xlabel("f")
+plt.ylabel("c', $m/s^2$")
+plt.show()
+
+#3
+
+ep0p = cn.epsilon_0 / (1 - f)**2
+rp = 1e-6;
+Ep = 1/(4*cn.pi*ep0p) * q/rp**2
+
+fig, axs = plt.subplots(2)
+#fig.suptitle('title')
+axs[0].plot(f, ep0p)
+axs[1].plot(f, Ep)
+axs[0].set(xlabel="", ylabel="$\epsilon_0$, F/m")
+axs[1].set(xlabel="f", ylabel="E', N/C")
+plt.show()
+
+#4
+
+f = 0.5
+rp = np.linspace(0.1,rMAX,100);
+ep0p = cn.epsilon_0 / (1 - f)**2
+Ep1 = 1/(4*cn.pi*cn.epsilon_0) * q/rp**2
+Ep2 = 1/(4*cn.pi*ep0p) * q/rp**2
+plt.plot(rp,Ep1, label="from problem 1")
+plt.plot(rp,Ep2, label="from problem 3")
+plt.xlabel("r', m")
+plt.ylabel("E', N/C")
+plt.legend()
+plt.show()
+
+# we see E’ (from 1_ is different from E’ (from 3) – Thus we have a problem - # it should describe same E.
+
+#5
+
+f = np.linspace(0,2.1,100);
+mu0p = cn.mu_0 / (1 - f)**2
+plt.plot(f,mu0p)
+plt.xlabel("f")
+plt.ylabel("$\mu_0'$, N/A$^2$")
+plt.show()
+
+#6
+f = np.linspace(0,2.1,100);
+
+# if we assume mu_0' = mu_0, but epsilon_0' is changing with f
+rp = 1e-6;
+ep0p = cn.epsilon_0 / (1 - f)**2
+Ep = 1/(4*cn.pi*ep0p) * q/rp**2
+# here B'= B
+
+# if we assume epsilon_0' = epsilon_0, but mu_0' is changing with f
+R = 1
+I = 1
+mu0p = cn.mu_0 / (1 - f)**2
+Bp = mu0p*I/(2*R)
+# here E'= E
+
+
+fig, axs = plt.subplots(2)
+#fig.suptitle('title')
+axs[0].plot(f, Ep)
+axs[0].plot(f, f*0 + Ep[0])
+axs[1].plot(f, Bp)
+axs[1].plot(f, f*0 + Bp[0])
+axs[1].set_ylim([0, 5*Bp[0]])
+
+axs[0].set(xlabel="", ylabel="E', N/C")
+axs[0].set_title("$\mu_0 = \mu_0'$ and $\epsilon_0'(f)$", loc='right')
+axs[1].set(xlabel="f", ylabel="B', N/C", label="2")
+axs[1].set_title("$\epsilon_0 = \epsilon_0'$ and $\mu_0'(f)$", loc='right')
+fig.tight_layout(pad=2.0)
+plt.show()
+
+
+#terminate:
+#import sys
+#sys.exit(0)
+
